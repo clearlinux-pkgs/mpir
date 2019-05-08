@@ -1,0 +1,19 @@
+Configure miss: sys/processor.h usability
+Configure miss: sys/processor.h presence
+Configure miss: sys/processor.h
+Configure miss: sys/pstat.h usability
+Configure miss: sys/pstat.h presence
+Configure miss: sys/systemcfg.h usability
+Configure miss: sys/systemcfg.h presence
+Configure miss: sys/systemcfg.h
+Configure miss: attr_get
+Configure miss: cputime
+Configure miss: processor_info
+Configure miss: pstat_getprocessor
+Configure miss: syssgi
+Configure miss: sysctlbyname
+Configure miss: whether sscanf needs writable input
+Configure miss: struct pst_processor.psp_iticksperclktick
+Configure miss: if m4wrap produces spurious output
+Configure miss: if globals are prefixed by underscore
+Configure miss: if .align assembly directive is logarithmic

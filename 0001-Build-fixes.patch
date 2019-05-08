@@ -1,0 +1,25 @@
+From e10ad1f405e5b2405028680610a7548be6627790 Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Wed, 8 May 2019 09:50:00 -0700
+Subject: [PATCH] Build fixes
+
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 5b363fb..1686965 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -45,7 +45,7 @@ m4_pattern_allow(WANT_GMP_CC)
+ # $build_alias, $host_alias and $target_alias are set to
+ # "athlon-pc-freebsd3.5".
+ #
+-if test -n "$target_alias" && test "$target_alias" != "$host_alias"; then
++if false && test -n "$target_alias" && test "$target_alias" != "$host_alias"; then
+   AC_MSG_ERROR([--target is not appropriate for GMP
+ Use --build=CPU-VENDOR-OS if you need to specify your CPU and/or system
+ explicitly.  Use --host if cross-compiling (see "Installing GMP" in the
+-- 
+2.21.0
+
