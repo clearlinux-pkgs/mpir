@@ -4,12 +4,13 @@
 #
 Name     : mpir
 Version  : 3.0.0
-Release  : 1
+Release  : 2
 URL      : https://github.com/wbhart/mpir/archive/mpir-3.0.0.tar.gz
 Source0  : https://github.com/wbhart/mpir/archive/mpir-3.0.0.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0 LGPL-3.0
+Requires: mpir-info = %{version}-%{release}
 Requires: mpir-lib = %{version}-%{release}
 Requires: mpir-license = %{version}-%{release}
 BuildRequires : automake
@@ -41,12 +42,12 @@ Requires: mpir = %{version}-%{release}
 dev components for the mpir package.
 
 
-%package doc
-Summary: doc components for the mpir package.
-Group: Documentation
+%package info
+Summary: info components for the mpir package.
+Group: Default
 
-%description doc
-doc components for the mpir package.
+%description info
+info components for the mpir package.
 
 
 %package lib
@@ -68,31 +69,36 @@ license components for the mpir package.
 
 %prep
 %setup -q -n mpir-mpir-3.0.0
+cd %{_builddir}/mpir-mpir-3.0.0
 %patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557334790
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1573790090
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %autogen --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1557334790
+export SOURCE_DATE_EPOCH=1573790090
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/mpir
-cp COPYING %{buildroot}/usr/share/package-licenses/mpir/COPYING
-cp COPYING.LIB %{buildroot}/usr/share/package-licenses/mpir/COPYING.LIB
+cp %{_builddir}/mpir-mpir-3.0.0/COPYING %{buildroot}/usr/share/package-licenses/mpir/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/mpir-mpir-3.0.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/mpir/e203d4ef09d404fa5c03cf6590e44231665be689
 %make_install
 
 %files
@@ -100,12 +106,14 @@ cp COPYING.LIB %{buildroot}/usr/share/package-licenses/mpir/COPYING.LIB
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/*.h
+/usr/include/mpir.h
 /usr/lib64/libmpir.so
 
-%files doc
+%files info
 %defattr(0644,root,root,0755)
-%doc /usr/share/info/*
+/usr/share/info/mpir.info
+/usr/share/info/mpir.info-1
+/usr/share/info/mpir.info-2
 
 %files lib
 %defattr(-,root,root,-)
@@ -114,5 +122,5 @@ cp COPYING.LIB %{buildroot}/usr/share/package-licenses/mpir/COPYING.LIB
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/mpir/COPYING
-/usr/share/package-licenses/mpir/COPYING.LIB
+/usr/share/package-licenses/mpir/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+/usr/share/package-licenses/mpir/e203d4ef09d404fa5c03cf6590e44231665be689
